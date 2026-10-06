@@ -156,6 +156,27 @@ class ServiceUnavailable(HTTPException):
     quiet = True
 
 
+class AdmissionRejected(ServiceUnavailable):
+    """准入席位已满且排队达到上限。"""
+
+    quiet = True
+    message = "Admission capacity exceeded"
+
+
+class AdmissionTimeout(ServiceUnavailable):
+    """排队等待准入席位超过允许时间。"""
+
+    quiet = True
+    message = "Timed out waiting for admission"
+
+
+class AdmissionUnavailable(ServiceUnavailable):
+    """应用正在停机，不再受理新的准入席位。"""
+
+    quiet = True
+    message = "Service is shutting down"
+
+
 class URLBuildError(HTTPException):
     """项目内部接口说明。"""
 
